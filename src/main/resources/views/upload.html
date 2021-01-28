@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" method="post" th:action="@{upload}" enctype="multipart/form-data">
+    <h3>None or global</h3>
+    <p>
+        This uses either no error handling or global error handling, depending on <em>global.errorHandling</em>
+        boolean flag. See: <pre>ErrorController</pre> and <pre>UploadController</pre>
+    </p>
+    <input type="file" name="files" multiple>
+    <input type="submit" value="Upload attachments"/>
+</form>
+
+<form action="#" method="post" th:action="@{uploadLocalErrorHandling}" enctype="multipart/form-data">
+    <h3>Local with HttpStatus 413</h3>
+    <p>This uses always local error handling and returns <em>Single.just(HttpResponse.status(HttpStatus.REQUEST_ENTITY_TOO_LARGE))</em>.
+        See: <pre>UploadControllerLocalErrorHandler</pre>
+    </p>
+    <input type="file" name="files2" multiple>
+    <input type="submit" value="Upload attachments"/>
+</form>
+
+<form action="#" method="post" th:action="@{uploadLocalErrorHandlingReturnServerError}" enctype="multipart/form-data">
+    <h3>Local with HttpStatus 500</h3>
+    <p>This uses always local error handling and returns <em>Single.just(HttpResponse.serverError())</em>.
+        See: <pre>UploadControllerLocalErrorHandlerReturnsServerError</pre></p>
+    <input type="file" name="files3" multiple>
+    <input type="submit" value="Upload attachments"/>
+</form>
+
+</body>
+</html>

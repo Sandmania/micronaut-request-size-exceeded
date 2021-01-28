@@ -1,0 +1,7 @@
+micronaut:
+  application:
+    name: fileSizeExceeded
+  server:
+    max-request-size: 614400 # 600*1024 = 600KB
+    multipart:
+      max-file-size: 409600 # 400*1024 = 400KB
